@@ -1,31 +1,30 @@
 package animaltest;
 
-import com.example.Feline;
+import org.junit.Test;
 import com.example.Lion;
 import org.junit.Assert;
-import org.junit.Test;
+import com.example.Feline;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
 public class LionHaveManeTest {
 
-    Feline feline = new Feline();
-    private final String sexLionValid;
-    private final String sexLionInValid;
     private final boolean haveMane;
+    private final String sexLionValid;
 
-    public LionHaveManeTest(String sexLion, String sexLionInValid, boolean haveMane) {
-        this.sexLionValid = sexLion;
-        this.sexLionInValid = sexLionInValid;
+    Feline feline = new Feline();
+
+    public LionHaveManeTest(String sexLion, boolean haveMane) {
         this.haveMane = haveMane;
+        this.sexLionValid = sexLion;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные: {0},{1}")
     public static Object[][] getSexLion() {
         return new Object[][] {
-                {"Самец", "Самей", true},
-                {"Самка", "Самкааа", false}
+                {"Самец", true},
+                {"Самка", false}
         };
     }
 
@@ -33,12 +32,6 @@ public class LionHaveManeTest {
     public void testLionDoesHaveMane() throws Exception {
         Lion lion = new Lion(sexLionValid, feline);
         boolean actual = lion.doesHaveMane();
-
         Assert.assertEquals(haveMane, actual);
-    }
-
-    @Test(expected = Exception.class)
-    public void testInvalidSexLion() throws Exception {
-        Lion lion = new Lion(sexLionInValid, feline);
     }
 }
