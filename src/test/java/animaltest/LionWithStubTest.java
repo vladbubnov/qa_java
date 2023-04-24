@@ -19,7 +19,7 @@ public class LionWithStubTest {
     @Test
     public void testLionGetKittensWithStub() throws Exception {
         Lion lion = new Lion("Самец", feline);
-        Mockito.when(lion.getKittens()).thenReturn(1);
+        Mockito.when(feline.getKittens()).thenReturn(1);
         Assert.assertEquals("Значения теста testLionGetKittensWithStub не совпадают",
                 1, lion.getKittens());
     }
@@ -28,7 +28,7 @@ public class LionWithStubTest {
     public void testLionGetFoodWithStub() throws Exception {
         Lion lion = new Lion("Самец", feline);
         List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
-        Mockito.when(lion.getFood()).thenReturn(new Feline().getFood("Хищник"));
+        Mockito.when(feline.getFood("Хищник")).thenReturn(expectedFood);
         Assert.assertEquals("Значения теста testLionGetFoodWithStub не совпадают",
                 expectedFood, lion.getFood());
     }
